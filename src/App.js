@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Aquí se desarrollará mi proyecto final "Birrapp", tienda de cervezas.
         </p>
         <a
           className="App-link"
