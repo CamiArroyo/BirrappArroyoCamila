@@ -5,6 +5,8 @@ import './index.css';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
+import Boton from './components/Boton';
+import ItemCount from './components/ItemCount';
 
 function App() {
   return (
@@ -15,9 +17,9 @@ function App() {
       </header>
 
       <main>
-        <ItemListContainer/>
+        <ItemListContainer titulo="Nuestros productos" />
       </main>
-      
+
       <footer>
         <Footer mensaje="Aquí habrá un footer bonito" />
       </footer>
