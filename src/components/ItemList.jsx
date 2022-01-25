@@ -14,6 +14,7 @@ const ItemList = () => {
         <div>
             {items.map(item => {
                 return <Item ItemName={item.name} ItemBrand={item.brand} Imagen={item.imagen} Description={item.description} UnitPrice={item.unitPrice} SixPackPrice={item.sixPackPrice} Stock={item.stock}/> 
+
             })}
         </div>
     )
