@@ -1,14 +1,14 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import { useState } from 'react';
 
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
-import Boton from './components/Boton';
-import ItemCount from './components/ItemCount';
 
 function App() {
+
   return (
     <div className="App">
 
