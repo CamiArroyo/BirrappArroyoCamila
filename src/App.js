@@ -1,14 +1,19 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-
+import { useState } from 'react';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
-import Boton from './components/Boton';
-import ItemCount from './components/ItemCount';
 
-function App() {
+const App = () => {
+
+  const [products, setProducts] = useState([
+    {name:"Cerveza Andes IPA lata 473", brand:"Andes"},
+    {name:"Cerveza Andes Negra lata 473", brand:"Andes"}, 
+    {name:"Cerveza Andes Roja lata 473", brand:"Andes"}
+  ])
+
   return (
     <div className="App">
 
@@ -17,7 +22,7 @@ function App() {
       </header>
 
       <main>
-        <ItemListContainer titulo="Nuestros productos" />
+        <ItemListContainer/>
       </main>
 
       <footer>
