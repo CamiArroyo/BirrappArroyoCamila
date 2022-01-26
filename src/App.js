@@ -1,30 +1,21 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './components/Home';
+import Layout from './components/Layout';
+import NoPage from './components/NoPage';
 
-import Footer from './components/Footer';
-import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListContainer';
-
-function App() {
+const App = () => {
 
   return (
-    <div className="App">
-
-      <header>
-        <NavBar />
-      </header>
-
-      <main>
-        <ItemListContainer/>
-      </main>
-
-      <footer>
-        <Footer mensaje="Aquí habrá un footer bonito" />
-      </footer>
-
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <Layout/> }>
+            <Route index element={ <Home /> }/>
+            <Route path="*" element={ <NoPage /> }/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

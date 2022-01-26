@@ -25,7 +25,7 @@ const Item = ({ItemName, ItemBrand, Description, UnitPrice, SixPackPrice, Stock}
 
     return (
         <>
-            <Card style={{ marginLeft: 100, marginTop:20, marginBottom:20, width: '20rem' }}>
+            <Card style={{ margin:20, width: '18rem' }}>
                 <Card.Img variant="top" src="" />
                 <Card.Body>
                     <Card.Title>{ItemName}</Card.Title>
