@@ -2,13 +2,14 @@ import React from 'react';
 import CartWidget from "./CartWidget";
 import {Container, Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import {BsSearch} from "react-icons/bs";
+import {Link} from 'react-router-dom';
 
 const NavBar = () => {
     return (
         <div>
             <Navbar bg="light" expand="lg" fixed="top">
                 <Container fluid>
-                    <Navbar.Brand href="#">Birrapp</Navbar.Brand>
+                    <Link to={"/"}><Navbar.Brand href="#home">Birrapp</Navbar.Brand></Link>
                     <div>
                         <Navbar.Collapse className="menuDesplegable" id="navbarScroll">
                             <Nav

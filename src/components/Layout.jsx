@@ -7,6 +7,10 @@ const Layout = () => {
 
     const [loading, setLoading] = useState(false);
 
+    /* Uso outlet que es donde voy a renderizar contenido (todos los componentes adicionales)
+    Context: todos los componentes tendrán disponible el loading y el setLoading */
+    /* Al emebeber el loading acá significa que lo podemos usar en cualquier página */
+
     return (
         <div className="App">
             <NavBar/>

@@ -1,26 +1,18 @@
 import { useState } from 'react';
 import React from 'react';
 import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-const Item = ({ItemName, ItemBrand, Description, UnitPrice, SixPackPrice, Stock}) => {
+const Item = ({product}) => {
+    const {productId, name, brand, unitPrice, sixPackPrice, description} = product
     const [itemsQty, setItemsQty] = useState(0);
+    const navigate = useNavigate();
 
-    function ControlNegativos() {
-        if(itemsQty < 1) {
-            setItemsQty(itemsQty)
-        }
-        else {
-            setItemsQty(itemsQty-1)
-        }
-    }
+    function ControlNegativos() { { itemsQty < 1 ? setItemsQty(itemsQty) : setItemsQty(itemsQty-1) } }
+    function ControlStock() { { itemsQty >= product.stock ? setItemsQty(itemsQty) : setItemsQty(itemsQty+1) } }
 
-    function ControlStock() {
-        if(itemsQty >= Stock) {
-            setItemsQty(itemsQty)
-        }
-        else {
-            setItemsQty(itemsQty+1)
-        }
+    const goToProduct = () => {
+        navigate(`/product/${productId}`)
     }
 
     return (
@@ -28,8 +20,8 @@ const Item = ({ItemName, ItemBrand, Description, UnitPrice, SixPackPrice, Stock}
             <Card style={{ margin:20, width: '18rem' }}>
                 <Card.Img variant="top" src="" />
                 <Card.Body>
-                    <Card.Title>{ItemName}</Card.Title>
-                    <Card.Subtitle>Marca: {ItemBrand}</Card.Subtitle>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Subtitle>Marca: {brand}</Card.Subtitle>
                     <Card.Text>
                         <div style={{ marginBottom: 10}}>
                             <Button onClick={ControlNegativos} variant="primary">-</Button>
@@ -37,14 +29,14 @@ const Item = ({ItemName, ItemBrand, Description, UnitPrice, SixPackPrice, Stock}
                             <Button onClick={ControlStock} variant="primary">+</Button>
                         </div>
                     </Card.Text>
-                    <Card.Text>{Description}</Card.Text>
+                    <Card.Text>{description}</Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroupItem>Precio por unidad: ${UnitPrice}</ListGroupItem>
-                    <ListGroupItem>Precio por sixpax: ${SixPackPrice}</ListGroupItem>
+                    <ListGroupItem>Precio por unidad: ${unitPrice}</ListGroupItem>
+                    <ListGroupItem>Precio por sixpax: ${sixPackPrice}</ListGroupItem>
                 </ListGroup>
                 <Card.Body>
-                    <Card.Link href="#">Ver detalle del producto</Card.Link>
+                    <Button variant="primary" onClick={() => goToProduct()}>Ver detalle del producto</Button>
                 </Card.Body>
             </Card>
         </>
