@@ -7,8 +7,8 @@ const ItemDetail = ({product}) => {
         <div style={{marginTop:100}}>
             <h1>HOLAAAAAAAA</h1>
             <h2>HOLAAAAAAAAAAAA</h2>
-            <p>{name}</p>
-            <p>{description}</p>
+            <p>Nombre: {name}</p>
+            <p>Description: {description}</p>
         </div>
     )
 }

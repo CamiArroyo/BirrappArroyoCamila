@@ -9,7 +9,7 @@ const NavBar = () => {
         <div>
             <Navbar bg="light" expand="lg" fixed="top">
                 <Container fluid>
-                    <Link to={"/"}><Navbar.Brand href="#home">Birrapp</Navbar.Brand></Link>
+                    <Navbar.Brand as={Link} to="/">Birrapp</Navbar.Brand>
                     <div>
                         <Navbar.Collapse className="menuDesplegable" id="navbarScroll">
                             <Nav

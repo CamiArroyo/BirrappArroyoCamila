@@ -18,6 +18,5 @@ export const getProducts = () => {
 }
 
 export const getProductId = (id) => {
-    let product = arregloProductos.find(object => object.productId === id);
-    return product
+    return arregloProductos.find(object => object.productId === Number(id));
 }

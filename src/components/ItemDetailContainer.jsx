@@ -10,9 +10,9 @@ const ItemDetailContainer = () => {
     const [product, setProduct] = useState(null);
 
     const promise = new Promise((resolve, reject) => {
-        let product = getProductId(id)
+        let item = getProductId(id)
         setTimeout(() => {
-            resolve(product)
+            resolve(item)
         }, 2000)
     })
 
@@ -32,11 +32,10 @@ const ItemDetailContainer = () => {
 
     return(
         <div className="item-detail-container" style={{marginTop:100}}>
-            <h1>{id}</h1>
-            <h1>{product}</h1>
             {product ? <ItemDetail product={product}/> : null }
         </div>
     )
+
 }
 
 export default ItemDetailContainer;

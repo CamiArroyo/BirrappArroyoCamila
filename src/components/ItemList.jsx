@@ -6,9 +6,9 @@ const ItemList = ({products}) => {
 
     return (
         <>
-            {products.map((product) => (
+            {products.map((product, index) => (
                 <Col>
-                    <Item product={product} />
+                    <Item key={index} product={product} />
                 </Col>
             ))}
         </>
