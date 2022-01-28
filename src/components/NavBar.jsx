@@ -6,8 +6,8 @@ import {Link} from 'react-router-dom';
 
 const NavBar = () => {
     return (
-        <div>
-            <Navbar bg="light" expand="lg" fixed="top">
+        <div style={{ fontSize: "1rem"}}>
+            <Navbar expand="lg" style={{ backgroundColor: "#fff159" }} fixed="top">
                 <Container fluid>
                     <Navbar.Brand as={Link} to="/">Birrapp</Navbar.Brand>
                     <div>
@@ -33,7 +33,6 @@ const NavBar = () => {
                         <FormControl
                         type="search"
                         placeholder="Busque un producto"
-                        className="me-2"
                         aria-label="Search"
                         />
                         <Button variant="secondary"><BsSearch size="1.5em" color="white"/></Button>

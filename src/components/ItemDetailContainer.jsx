@@ -9,7 +9,7 @@ const ItemDetailContainer = () => {
     const [loading, setLoading] = useOutletContext();
     const [product, setProduct] = useState(null);
 
-    const promise = new Promise((resolve, reject) => {
+    const getItem = new Promise((resolve, reject) => {
         let item = getProductId(id)
         setTimeout(() => {
             resolve(item)
@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         let mounted = true
         setLoading(true)
-        promise.then(result => {
+        getItem.then(result => {
             if(mounted) {
                 setProduct(result)
                 setTimeout(() => {
