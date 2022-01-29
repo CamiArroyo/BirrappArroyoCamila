@@ -2,7 +2,7 @@ import React from 'react';
 import CartWidget from "./CartWidget";
 import {Container, Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import {BsSearch} from "react-icons/bs";
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 const NavBar = () => {
     return (
@@ -16,9 +16,9 @@ const NavBar = () => {
                                 className="me-auto my-2 my-lg-0"
                                 style={{ maxHeight: '100px' }}
                             >
-                            <Nav.Link href="#action1">Clásicas</Nav.Link>
-                            <Nav.Link href="#action2">Premium</Nav.Link>
-                            <Nav.Link href="#action3">Artesanales</Nav.Link>
+                            <Nav.Link as={NavLink} to="/category/Clásica">Clásicas</Nav.Link>
+                            <Nav.Link as={NavLink} to="/category/Premium">Premium</Nav.Link>
+                            <Nav.Link as={NavLink} to="/category/Artesanal">Artesanales</Nav.Link>
                             <NavDropdown title="Familias" id="navbarScrollingDropdown">
                                 <NavDropdown.Item href="#action1">Quilmes</NavDropdown.Item>
                                 <NavDropdown.Item href="#action2">Patagonia</NavDropdown.Item>
