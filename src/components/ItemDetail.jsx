@@ -20,7 +20,7 @@ const ItemDetail = ({product}) => {
                                 <Nav.Link href="#first"><span style={{fontWeight:600}}>{name}</span></Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to="/" className="btn btn-link">Volver atras</Link>
+                                <Link to="/" className="btn btn-link">Volver al inicio</Link>
                             </Nav.Item>
                         </Nav>
                     </Card.Header>
@@ -33,13 +33,13 @@ const ItemDetail = ({product}) => {
                                 <Card.Title style={{fontSize:30}}>{name}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">Marca: {brand}</Card.Subtitle>
                                 <Card.Text style={{fontSize:20}}>Precio por unidad: ${unitPrice}</Card.Text>
-                                <Accordion className="d-block mx-auto" style={{ width:'16rem', marginBottom:50}}>
+                                <Accordion className="d-block mx-auto" style={{ width:'16rem', marginBottom:30}}>
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Ver disponibilidad</Accordion.Header>
                                         <Accordion.Body>Stock actual: {stock} unidades.</Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>
-                                <Card.Text>Descripción del producto: {description}</Card.Text>
+                                <Card.Text>{description}</Card.Text>
                                 <hr/>
                                 <div style={{ marginTop:20, marginBottom: 10}}>
                                     <Button style={{marginRight:8}} onClick={ControlNegativos} variant="secondary">-</Button>

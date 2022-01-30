@@ -7,26 +7,18 @@ import { getProducts } from '../services/Products';
 const Home = () => {
 
     const[products, setProducts] = useState([]);
-    const[loading, setLoading] = useOutletContext();
+    const[setLoading] = useOutletContext();
 
-    const promise = new Promise((resolve, reject) => {
-        let arregloProductos = getProducts
-        setTimeout(() => {
-            resolve(arregloProductos)
-        }, 2000)
-    })
-    
     useEffect(() => {
         let mounted = true
         setLoading(true)
-        promise.then(results => {
-            if(mounted) {
-                setProducts(results)
-                setTimeout(() => {
-                    setLoading(false)
-                }, 0)
-            }
-        })
+        if(mounted) {
+            let productsArray = getProducts()
+            setTimeout(() => {
+                setProducts(productsArray)
+                setLoading(false)
+            }, 1000)
+        }
         return () => mounted = false;
     }, [])
 

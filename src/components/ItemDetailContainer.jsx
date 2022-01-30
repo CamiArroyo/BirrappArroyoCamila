@@ -1,34 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
-import { getProductId } from '../services/Products';
+import { getProductById } from '../services/Products';
 import ItemDetail from './ItemDetail';
 
 const ItemDetailContainer = () => {
     
     const { id } = useParams();
-    const [loading, setLoading] = useOutletContext();
+    const [setLoading] = useOutletContext();
     const [product, setProduct] = useState(null);
-
-    const getItem = new Promise((resolve, reject) => {
-        let item = getProductId(id)
-        setTimeout(() => {
-            resolve(item)
-        }, 2000)
-    })
 
     useEffect(() => {
         let mounted = true
         setLoading(true)
-        getItem.then(result => {
-            if(mounted) {
-                setProduct(result)
-                setTimeout(() => {
-                    setLoading(false)
-                }, 0)
-            }
-        })
+        if(mounted) {
+            let product = getProductById(id)
+            setTimeout(() => {
+                setProduct(product)
+                setLoading(false)
+            }, 1000)
+        }
         return () => mounted = false;
-    }, [])
+    }, [id])
 
     return(
         <div className="item-detail-container" style={{marginTop:100}}>
