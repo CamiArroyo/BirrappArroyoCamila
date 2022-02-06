@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import NoPage from './components/NoPage';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Category from './components/Category';
+import Cart from './components/Cart'
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
             <Route index element={ <Home /> }/>
             <Route path="/product/:id" element={ <ItemDetailContainer/> }/>
             <Route path="/category/:id" element={ <Category/> }/>
+            <Route path="/cart" element={ <Cart /> }/>
             <Route path="*" element={ <NoPage /> }/>
           </Route>
         </Routes>

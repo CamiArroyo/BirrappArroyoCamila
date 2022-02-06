@@ -1,14 +1,24 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Accordion, Nav, Col, Container, Row, Card, Button} from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import ItemCount from './ItemCount';
 
 const ItemDetail = ({product}) => {
+
     const {name, brand, unitPrice, urlImg, description, stock} = product
     const [itemsQty, setItemsQty] = useState(0);
 
-    function ControlNegativos() { { itemsQty < 1 ? setItemsQty(itemsQty) : setItemsQty(itemsQty-1) } }
-    function ControlStock() { { itemsQty >= product.stock ? setItemsQty(itemsQty) : setItemsQty(itemsQty+1) } }
+    const [cambiarBotones, setCambiarBotones] = useState(false);
+    const [cdadElegida, setCdadElegida] = useState(0);
+
+    const onAdd = (qty) => {
+        console.log("Cdad elegida: " + qty)
+        if (qty > 0) {
+            setCambiarBotones(true)
+            setCdadElegida(qty)
+        }
+    }
 
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
@@ -41,12 +51,18 @@ const ItemDetail = ({product}) => {
                                 </Accordion>
                                 <Card.Text>{description}</Card.Text>
                                 <hr/>
+
                                 <div style={{ marginTop:20, marginBottom: 10}}>
-                                    <Button style={{marginRight:8}} onClick={ControlNegativos} variant="secondary">-</Button>
-                                    <span>{itemsQty}</span>
-                                    <Button style={{marginLeft:8}} onClick={ControlStock} variant="secondary">+</Button>
+                                    <Button onClick={ () => onAdd (itemsQty) } variant="secondary">Agregar al carrito</Button>
                                 </div>
-                                <Button variant="secondary">Agregar al carrito</Button>
+
+                                { cambiarBotones ? (
+                                    <div>
+                                        <Link to={"/"}><Button style={{ marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
+                                        <Link to={"/cart"}><Button style={{ marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
+                                    </div>
+                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
+
                             </Col>
                         </Row>
                     </Card.Body>
