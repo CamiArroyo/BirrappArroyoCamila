@@ -10,15 +10,6 @@ const ItemDetail = ({product}) => {
     const [itemsQty, setItemsQty] = useState(0);
 
     const [cambiarBotones, setCambiarBotones] = useState(false);
-    const [cdadElegida, setCdadElegida] = useState(0);
-
-    const onAdd = (qty) => {
-        console.log("Cdad elegida: " + qty)
-        if (qty > 0) {
-            setCambiarBotones(true)
-            setCdadElegida(qty)
-        }
-    }
 
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
@@ -52,16 +43,12 @@ const ItemDetail = ({product}) => {
                                 <Card.Text>{description}</Card.Text>
                                 <hr/>
 
-                                <div style={{ marginTop:20, marginBottom: 10}}>
-                                    <Button onClick={ () => onAdd (itemsQty) } variant="secondary">Agregar al carrito</Button>
-                                </div>
-
                                 { cambiarBotones ? (
                                     <div>
                                         <Link to={"/"}><Button style={{ marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
                                         <Link to={"/cart"}><Button style={{ marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
                                     </div>
-                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
+                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} setCambiarBotones={setCambiarBotones} /> }
 
                             </Col>
                         </Row>
