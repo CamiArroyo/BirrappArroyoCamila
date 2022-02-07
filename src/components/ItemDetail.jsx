@@ -1,15 +1,17 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Accordion, Nav, Col, Container, Row, Card, Button} from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { CartContext } from '../contexts/CartContext';
 import ItemCount from './ItemCount';
 
-const ItemDetail = ({product}) => {
+const ItemDetail = ( {product} ) => {
+
+    //"addItem" es la función que estoy tomando de mi contexto "cartContext"
+    const { addItem } = useContext(CartContext);
 
     const {name, brand, unitPrice, urlImg, description, stock} = product
     const [itemsQty, setItemsQty] = useState(0);
-
-    const [cambiarBotones, setCambiarBotones] = useState(false);
 
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
@@ -43,12 +45,11 @@ const ItemDetail = ({product}) => {
                                 <Card.Text>{description}</Card.Text>
                                 <hr/>
 
-                                { cambiarBotones ? (
-                                    <div>
-                                        <Link to={"/"}><Button style={{ marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
-                                        <Link to={"/cart"}><Button style={{ marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
-                                    </div>
-                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} setCambiarBotones={setCambiarBotones} /> }
+                                <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
+                                
+                                <div style={{ marginTop:20, marginBottom: 10}}>
+                                    <Button onClick={ () => addItem(product, itemsQty) } variant="secondary">Agregar al carrito</Button>
+                                </div>
 
                             </Col>
                         </Row>

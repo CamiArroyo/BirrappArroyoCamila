@@ -1,8 +1,9 @@
 import React from 'react';
 import CartWidget from "./CartWidget";
-import {Container, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap';
-import {BsSearch} from "react-icons/bs";
-import {Link, NavLink} from 'react-router-dom';
+import { Container, Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
+import { BsSearch } from "react-icons/bs";
+import { Link, NavLink } from 'react-router-dom';
+import { CartProvider } from '../contexts/CartContext';
 
 /* FUTURO DESPLEGABLE EN EL NAVBAR
     <NavDropdown title="Familias" id="navbarScrollingDropdown">
@@ -40,7 +41,10 @@ const NavBar = () => {
                         />
                         <Button variant="secondary"><BsSearch size="1.5em" color="white"/></Button>
                     </Form>
-                    <Button variant="secondary"><CartWidget /></Button>
+                    <Nav>
+                        <Nav.Link href="#link"><CartWidget /></Nav.Link>
+                    </Nav>
+                
                 </Container>
             </Navbar>
         </div>
