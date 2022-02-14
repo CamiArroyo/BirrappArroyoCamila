@@ -42,7 +42,7 @@ const NavBar = () => {
                         <Button variant="secondary"><BsSearch size="1.5em" color="white"/></Button>
                     </Form>
                     <Nav>
-                        <Nav.Link href="#link"><CartWidget /></Nav.Link>
+                        <Nav.Link as={Link} to="/cart"><CartWidget /></Nav.Link>
                     </Nav>
                 
                 </Container>

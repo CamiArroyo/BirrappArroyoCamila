@@ -48,7 +48,7 @@ const ItemDetail = ( {product} ) => {
                                 <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
                                 
                                 <div style={{ marginTop:20, marginBottom: 10}}>
-                                    <Button onClick={ () => addItem(product, itemsQty) } variant="secondary">Agregar al carrito</Button>
+                                    <Button onClick={ () => addItem(product, itemsQty, unitPrice) } variant="secondary">Agregar al carrito</Button>
                                 </div>
 
                             </Col>
