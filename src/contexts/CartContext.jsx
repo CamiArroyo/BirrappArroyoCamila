@@ -22,7 +22,7 @@ export const CartProvider = ( {children} ) => { //children es el prop que me per
         return flag
     }
 
-    const addItem = (producto, qty, unitPrice) => {
+    const addItem = (producto, qty, unitPrice, setCambiarBotones) => {
         if (isInCart(producto)) {
             console.log("Este producto ya existe en el carrito")
         } else {
@@ -32,6 +32,7 @@ export const CartProvider = ( {children} ) => { //children es el prop que me per
                 producto.subtotal = (qty*unitPrice)
                 console.log("subtotal:", producto.subtotal)
                 setCartItems([...cartItems, producto]) // spread operator: con los "..." agarramos una copia del array, instanciamos esa copia y agregamos un nuevo valor
+                setCambiarBotones(true)
                 console.log(cartItems)
             } else {
                 console.log("Está intentando agregar un producto con cantidad 0")
@@ -47,8 +48,16 @@ export const CartProvider = ( {children} ) => { //children es el prop que me per
         setCartItems(cartItems.filter(item => item.productId !== itemId))
     }
 
+    const sumTotal = () => {
+        let sum = 0
+        cartItems.map((p) => {
+            sum += p.subtotal
+        })
+        return sum
+    }
+
     return (
-        <CartContext.Provider value={ {cartItems, cartItemsQty, addItem, removeItem} }>
+        <CartContext.Provider value={ {cartItems, cartItemsQty, addItem, removeItem, clearAll, sumTotal} }>
             {children}
         </CartContext.Provider>
     )

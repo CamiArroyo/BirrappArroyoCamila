@@ -7,19 +7,7 @@ import { useEffect } from 'react';
 
 const Cart = () => {
 
-    const { cartItems, cartItemsQty, removeItem } = useContext(CartContext);
-    const [ total, setTotal ] = useState(0);
-
-    /*
-    useEffect(() => {
-        if (cartItemsQty() > 0) {
-            const prevTotal = cartItems.reduce((itemA, itemB) => {
-                return ( itemA.subtotal + itemB.subtotal )
-            }, 0)
-            setTotal(prevTotal)
-        }
-    }, [cartItems]);
-    */
+    const { cartItems, cartItemsQty, removeItem, sumTotal, clearAll } = useContext(CartContext);
 
     return (
         <>
@@ -38,7 +26,7 @@ const Cart = () => {
                                         { cartItems.map(item => {
                                             return <li style={{ listStyle: "none" }} className="cart-item clearfix">
                                                 <div className="cart-itemname">
-                                                    <div style={{ fontWeight: 600 }}>Nombre: {item.name}</div>
+                                                    <div style={{ fontWeight: 600 }}>{item.name}</div>
                                                 </div>
                                                 <div className="cart-item-info d-flex flex-md-row flex-column justify-content-between">
                                                     <img variant="top" src={require('../components/img/'+item.urlImg)} width="100" height="auto"/>
@@ -65,10 +53,14 @@ const Cart = () => {
                                 <hr />
                                 <div className="order-total">
                                     <div className="order-total-content text-md-right">
-                                        <div className="order-total-content-title">Total: ${total}</div>
+                                        <div className="order-total-content-title">Total: ${ sumTotal() }</div>
                                     </div>
                                 </div>
-                                <Button variant="secondary"><Link as={Link} to="/">Seguir agregando productos al carrito</Link></Button>
+                                <div>
+                                    <Button style={{margin : 10}} variant="secondary"><Link as={Link} to="/">Seguir agregando productos al carrito</Link></Button>
+                                    <Button style={{margin : 10}} onClick={ () => clearAll() } variant="secondary">Vaciar carrito</Button>
+                                    <Button style={{margin : 10}} variant="secondary">Finalizar compra</Button>
+                                </div>
                             </Col>
                         </Row>
                     </Container>

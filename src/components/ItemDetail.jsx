@@ -13,6 +13,8 @@ const ItemDetail = ( {product} ) => {
     const {name, brand, unitPrice, urlImg, description, stock} = product
     const [itemsQty, setItemsQty] = useState(0);
 
+    const [cambiarBotones, setCambiarBotones] = useState(false);
+
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
             <Container>
@@ -45,11 +47,18 @@ const ItemDetail = ( {product} ) => {
                                 <Card.Text>{description}</Card.Text>
                                 <hr/>
 
-                                <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
-                                
                                 <div style={{ marginTop:20, marginBottom: 10}}>
-                                    <Button onClick={ () => addItem(product, itemsQty, unitPrice) } variant="secondary">Agregar al carrito</Button>
+                                    <Button onClick={ () => addItem(product, itemsQty, unitPrice, setCambiarBotones) } variant="secondary">Agregar al carrito</Button>
                                 </div>
+
+                                { cambiarBotones ? (
+                                    <div>
+                                        <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
+                                        <br/>
+                                        <Link to={"/"}><Button style={{ marginTop:10, marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
+                                        <Link to={"/cart"}><Button style={{ marginTop:10, marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
+                                    </div>
+                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
 
                             </Col>
                         </Row>
