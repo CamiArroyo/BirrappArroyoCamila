@@ -15,7 +15,7 @@ const ItemDetailContainer = () => {
         const getFromFirebase = async () => {
             const docRef = doc(db, "items", id)
             const docSnapshot = await getDoc(docRef)
-            setProduct(docSnapshot.data())
+            setProduct({id: docSnapshot.id, ...docSnapshot.data()})
         }
 
         let mounted = true

@@ -19,6 +19,7 @@ const Home = () => {
             snapshot.forEach( (doc) => {
                 array.push({id: doc.id, ...doc.data()})
             })
+            console.log("Arreglo completo: ", array)
             setProducts(array)
         }
 
@@ -34,6 +35,7 @@ const Home = () => {
         return () => mounted = false;
     }, [])
 
+/*
     useEffect(() => {//obtengo una copia de la referencia a mi base de datos
 
         //lo declaramos asíncrono para luego usar el "await"
@@ -68,6 +70,7 @@ const Home = () => {
         getFromFirebase()
 
     }, []);
+*/
 
     return (
         <div>

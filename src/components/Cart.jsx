@@ -3,7 +3,6 @@ import { Col, Container, Button, Row } from 'react-bootstrap';
 import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const Cart = () => {
 
@@ -43,7 +42,7 @@ const Cart = () => {
                                                         <div>${item.subtotal}</div>
                                                     </div>
                                                     <div className="cart-item-eliminar">
-                                                        <Button onClick={ () => removeItem(item.productId) } variant="secondary">X</Button>
+                                                        <Button onClick={ () => removeItem(item.id) } variant="secondary">X</Button>
                                                     </div>
                                                 </div>
                                             </li>

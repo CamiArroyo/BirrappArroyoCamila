@@ -8,12 +8,13 @@ import ItemCount from './ItemCount';
 const ItemDetail = ( {product} ) => {
 
     //"addItem" es la función que estoy tomando de mi contexto "cartContext"
-    const { addItem } = useContext(CartContext);
+    const { addItem, InfoModal } = useContext(CartContext);
 
-    const {name, brand, unitPrice, urlImg, description, stock} = product
+    const {id, name, brand, unitPrice, urlImg, description, stock} = product
     const [itemsQty, setItemsQty] = useState(0);
 
     const [cambiarBotones, setCambiarBotones] = useState(false);
+    const [cambiarCantidad, setCambiarCantidad] = useState(false);
 
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
@@ -38,6 +39,7 @@ const ItemDetail = ( {product} ) => {
                                 <Card.Title style={{fontSize:30}}>{name}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">Marca: {brand}</Card.Subtitle>
                                 <Card.Text style={{fontSize:20}}>Precio por unidad: ${unitPrice}</Card.Text>
+                                <Card.Text style={{fontSize:20}}>Id: {id}</Card.Text>
                                 <Accordion className="d-block mx-auto" style={{ width:'16rem', marginBottom:30}}>
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Ver disponibilidad</Accordion.Header>
@@ -48,17 +50,31 @@ const ItemDetail = ( {product} ) => {
                                 <hr/>
 
                                 <div style={{ marginTop:20, marginBottom: 10}}>
-                                    <Button onClick={ () => addItem(product, itemsQty, unitPrice, setCambiarBotones) } variant="secondary">Agregar al carrito</Button>
+                                    <Button onClick={ () => addItem(product, itemsQty, unitPrice, setCambiarBotones, setCambiarCantidad) } variant="secondary">Agregar al carrito</Button>
                                 </div>
+
+                                { cambiarBotones || cambiarCantidad ? (
+                                    <>
+                                        <div>
+                                            <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
+                                            <br/>
+                                            <Link to={"/"}><Button style={{ marginTop:10, marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
+                                            <Link to={"/cart"}><Button style={{ marginTop:10, marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
+                                        </div>
+                                    </>
+                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
 
                                 { cambiarBotones ? (
                                     <div>
-                                        <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
-                                        <br/>
-                                        <Link to={"/"}><Button style={{ marginTop:10, marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
-                                        <Link to={"/cart"}><Button style={{ marginTop:10, marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
+                                        <InfoModal name={name} info="Producto agregado al carrito con éxito!"></InfoModal>
                                     </div>
-                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
+                                ) : null }
+
+                                { cambiarCantidad ? (
+                                    <div>
+                                        <InfoModal name={name} info="Cantidad en el carrito actualizada!"></InfoModal>
+                                    </div>
+                                ) : null }
 
                             </Col>
                         </Row>
