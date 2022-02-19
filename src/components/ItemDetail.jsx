@@ -39,7 +39,6 @@ const ItemDetail = ( {product} ) => {
                                 <Card.Title style={{fontSize:30}}>{name}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">Marca: {brand}</Card.Subtitle>
                                 <Card.Text style={{fontSize:20}}>Precio por unidad: ${unitPrice}</Card.Text>
-                                <Card.Text style={{fontSize:20}}>Id: {id}</Card.Text>
                                 <Accordion className="d-block mx-auto" style={{ width:'16rem', marginBottom:30}}>
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Ver disponibilidad</Accordion.Header>

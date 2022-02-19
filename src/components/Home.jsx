@@ -12,6 +12,18 @@ const Home = () => {
 
     useEffect(() => {
 
+        const sortArray = (array) => {
+            array.sort((a,b) => {
+                if(a.name < b.name) {
+                    return -1
+                }
+                if (a.name > b.name) {
+                    return 1
+                }
+                return 0
+            })
+        }
+
         const getFromFirebase = async () => {
             const query = collection(db, "items");
             const snapshot = await getDocs(query);
@@ -19,7 +31,8 @@ const Home = () => {
             snapshot.forEach( (doc) => {
                 array.push({id: doc.id, ...doc.data()})
             })
-            console.log("Arreglo completo: ", array)
+            sortArray(array)
+            console.log("Arreglo completo ordenado: ", array)
             setProducts(array)
         }
 
