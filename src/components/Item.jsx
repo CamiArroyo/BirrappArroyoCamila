@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 const Item = ({product}) => {
 
-    const {productId, name, brand, unitPrice, urlImg} = product
+    const {id, name, brand, unitPrice, urlImg} = product
     const navigate = useNavigate();
 
     const goToProduct = () => {
-        navigate(`/product/${productId}`)
+        navigate(`/product/${id}`)
     }
 
     return (

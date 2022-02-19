@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
-import { getProductById } from '../services/Products';
 import ItemDetail from './ItemDetail';
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const ItemDetailContainer = () => {
     
@@ -10,17 +11,24 @@ const ItemDetailContainer = () => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
+
+        const getFromFirebase = async () => {
+            const docRef = doc(db, "items", id)
+            const docSnapshot = await getDoc(docRef)
+            setProduct(docSnapshot.data())
+        }
+
         let mounted = true
         setLoading(true)
         if(mounted) {
-            let product = getProductById(id)
             setTimeout(() => {
-                setProduct(product)
+                getFromFirebase()
                 setLoading(false)
             }, 1000)
         }
+
         return () => mounted = false;
-    }, [id])
+    }, [])
 
     return(
         <div className="item-detail-container" style={{marginTop:100}}>

@@ -26,9 +26,9 @@ const NavBar = () => {
                                 className="me-auto my-2 my-lg-0"
                                 style={{ maxHeight: '100px' }}
                             >
-                            <Nav.Link as={NavLink} to="/category/1">Clásicas</Nav.Link>
-                            <Nav.Link as={NavLink} to="/category/2">Premium</Nav.Link>
-                            <Nav.Link as={NavLink} to="/category/3">Artesanales</Nav.Link>
+                            <Nav.Link as={NavLink} to="/category/Clásica">Clásicas</Nav.Link>
+                            <Nav.Link as={NavLink} to="/category/Premium">Premium</Nav.Link>
+                            <Nav.Link as={NavLink} to="/category/Artesanal">Artesanales</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </div>

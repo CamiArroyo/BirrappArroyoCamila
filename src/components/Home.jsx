@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemListContainer from './ItemListContainer';
 import { useOutletContext } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getProducts } from '../services/Products';
 import { collection, getDocs, query, where, getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -12,15 +11,26 @@ const Home = () => {
     const[setLoading] = useOutletContext();
 
     useEffect(() => {
+
+        const getFromFirebase = async () => {
+            const query = collection(db, "items");
+            const snapshot = await getDocs(query);
+            let array = [];
+            snapshot.forEach( (doc) => {
+                array.push({id: doc.id, ...doc.data()})
+            })
+            setProducts(array)
+        }
+
         let mounted = true
         setLoading(true)
         if(mounted) {
-            let productsArray = getProducts()
             setTimeout(() => {
-                setProducts(productsArray)
+                getFromFirebase()
                 setLoading(false)
             }, 1000)
         }
+
         return () => mounted = false;
     }, [])
 
@@ -28,7 +38,7 @@ const Home = () => {
 
         //lo declaramos asíncrono para luego usar el "await"
         const getFromFirebase = async () => {
-
+            
             console.log("Traigo un elemento por nombre, usando un query y un where para filtrar")
             const q = query(collection(db, "items"), where("name", "==", "Andes roja"));
             //si no quiero filtrar los datos, solo hago un getDocs a collection(db, "items")
@@ -42,6 +52,17 @@ const Home = () => {
             const docRef = doc(db, "items", "uQ7Ii2yQYTfoT9gqjuxt")
             const docSnapshot = await getDoc(docRef) //para getDoc necesito la referencia al documento
             console.log(docSnapshot.data())
+
+            console.log("Traigo todos los items de mi colección")
+            const nQuery = collection(db, "items");
+            const nSnapshot = await getDocs(nQuery);
+            let arreglo = [];
+            nSnapshot.forEach( doc => {
+                console.log("El ID: " , doc.id) //el "id" no está dentro de data()
+                console.log("Demás datos del producto: ", doc.data()) //con doc.data() obtengo los datos de mi item en la colección
+                arreglo.push({id: doc.id, ...doc.data()})
+            })
+            console.log("Arreglo completo: ", arreglo)
         }
 
         getFromFirebase()
