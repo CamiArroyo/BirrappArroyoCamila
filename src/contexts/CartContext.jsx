@@ -31,6 +31,16 @@ export const CartProvider = ( {children} ) => { //children es el prop que me per
         })
     }
 
+    const outOfStock = (producto, qty, stock) => {
+        let flag = false
+        cartItems.map((p) => {
+            if ((p.id === producto.id) && ((p.qty + qty) > stock)) {
+                flag = true
+            }
+        })
+        return flag
+    }
+
     function InfoModal({name, info}) {
         const [show, setShow] = useState(true);
     
@@ -51,20 +61,22 @@ export const CartProvider = ( {children} ) => { //children es el prop que me per
         );
     }
 
-    const addItem = (producto, qty, unitPrice, setCambiarBotones, setCambiarCantidad) => {
-        if (isInCart(producto)) {
-            console.log("Este producto ya existe en el carrito, se actualiza la cantidad")
-            setNewQty(producto, qty)
-            setCambiarCantidad(true)
+    const addItem = (producto, qty, unitPrice, stock, setSwitchButtons, setUpdateQuantity, setCheckStock) => {
+        if (outOfStock(producto, qty, stock)) {
+            setCheckStock(true)
         } else {
-            if ( qty>0 ) {
-                producto.qty = qty
-                producto.subtotal = (qty*unitPrice)
-                console.log("Producto a agregar: ", producto)
-                setCartItems([...cartItems, producto]) // spread operator: con los "..." agarramos una copia del array, instanciamos esa copia y agregamos un nuevo valor
-                setCambiarBotones(true)
+            if (isInCart(producto)) {
+                console.log("Este producto ya existe en el carrito, se actualiza la cantidad")
+                setNewQty(producto, qty)
+                setUpdateQuantity(true)
             } else {
-                console.log("Está intentando agregar un producto con cantidad 0")
+                if ( qty>0 ) {
+                    producto.qty = qty
+                    producto.subtotal = (qty*unitPrice)
+                    console.log("Producto a agregar: ", producto)
+                    setCartItems([...cartItems, producto]) // spread operator: con los "..." agarramos una copia del array, instanciamos esa copia y agregamos un nuevo valor
+                    setSwitchButtons(true)
+                }
             }
         }
     }

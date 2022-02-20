@@ -7,14 +7,14 @@ import ItemCount from './ItemCount';
 
 const ItemDetail = ( {product} ) => {
 
-    //"addItem" es la función que estoy tomando de mi contexto "cartContext"
     const { addItem, InfoModal } = useContext(CartContext);
 
-    const {id, name, brand, unitPrice, urlImg, description, stock} = product
-    const [itemsQty, setItemsQty] = useState(0);
+    const {name, brand, unitPrice, urlImg, description, stock} = product
+    const [itemsQty, setItemsQty] = useState(1);
 
-    const [cambiarBotones, setCambiarBotones] = useState(false);
-    const [cambiarCantidad, setCambiarCantidad] = useState(false);
+    const [switchButtons, setSwitchButtons] = useState(false);
+    const [updateQuantity, setUpdateQuantity] = useState(false);
+    const [checkStock, setCheckStock] = useState(false);
 
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
@@ -48,11 +48,16 @@ const ItemDetail = ( {product} ) => {
                                 <Card.Text>{description}</Card.Text>
                                 <hr/>
 
-                                <div style={{ marginTop:20, marginBottom: 10}}>
-                                    <Button onClick={ () => addItem(product, itemsQty, unitPrice, setCambiarBotones, setCambiarCantidad) } variant="secondary">Agregar al carrito</Button>
-                                </div>
+                                { (stock>0) ? (
+                                    <div style={{ marginTop:20, marginBottom: 10}}>
+                                        <Button onClick={ () => addItem(product, itemsQty, unitPrice, stock, setSwitchButtons, setUpdateQuantity, setCheckStock) } variant="secondary">Agregar al carrito</Button>
+                                    </div>
+                                    ) : 
+                                    <div style={{ marginTop:20, marginBottom: 10}}>
+                                        <Button disabled variant="secondary">No hay stock disponible</Button>
+                                    </div> }
 
-                                { cambiarBotones || cambiarCantidad ? (
+                                { switchButtons || updateQuantity ? (
                                     <>
                                         <div>
                                             <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
@@ -63,15 +68,21 @@ const ItemDetail = ( {product} ) => {
                                     </>
                                     ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
 
-                                { cambiarBotones ? (
+                                { checkStock ? (
                                     <div>
-                                        <InfoModal name={name} info="Producto agregado al carrito con éxito!"></InfoModal>
+                                        <InfoModal name={name} info="Está excediendo la cantidad en stock, por favor verifique disponibilidad."></InfoModal>
                                     </div>
                                 ) : null }
 
-                                { cambiarCantidad ? (
+                                { switchButtons ? (
                                     <div>
-                                        <InfoModal name={name} info="Cantidad en el carrito actualizada!"></InfoModal>
+                                        <InfoModal name={name} info="¡Producto agregado al carrito con éxito!"></InfoModal>
+                                    </div>
+                                ) : null }
+
+                                { updateQuantity ? (
+                                    <div>
+                                        <InfoModal name={name} info="¡Cantidad en el carrito actualizada!"></InfoModal>
                                     </div>
                                 ) : null }
 
