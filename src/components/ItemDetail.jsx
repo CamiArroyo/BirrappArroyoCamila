@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Accordion, Nav, Col, Container, Row, Card, Button} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { CartContext } from '../contexts/CartContext';
@@ -7,7 +6,7 @@ import ItemCount from './ItemCount';
 
 const ItemDetail = ( {product} ) => {
 
-    const { addItem, InfoModal } = useContext(CartContext);
+    const { InfoModal } = useContext(CartContext);
 
     const {name, brand, unitPrice, urlImg, description, stock} = product
     const [itemsQty, setItemsQty] = useState(1);
@@ -48,25 +47,14 @@ const ItemDetail = ( {product} ) => {
                                 <Card.Text>{description}</Card.Text>
                                 <hr/>
 
-                                { (stock>0) ? (
-                                    <div style={{ marginTop:20, marginBottom: 10}}>
-                                        <Button onClick={ () => addItem(product, itemsQty, unitPrice, stock, setSwitchButtons, setUpdateQuantity, setCheckStock) } variant="secondary">Agregar al carrito</Button>
-                                    </div>
-                                    ) : 
-                                    <div style={{ marginTop:20, marginBottom: 10}}>
-                                        <Button disabled variant="secondary">No hay stock disponible</Button>
-                                    </div> }
-
-                                { switchButtons || updateQuantity ? (
+                                { switchButtons || updateQuantity || checkStock ? (
                                     <>
                                         <div>
-                                            <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} />
-                                            <br/>
                                             <Link to={"/"}><Button style={{ marginTop:10, marginRight: 5}} variant="secondary">Volver al inicio</Button></Link>
                                             <Link to={"/cart"}><Button style={{ marginTop:10, marginLeft: 5}} variant="secondary">Finalizar compra</Button></Link>
                                         </div>
                                     </>
-                                    ) : <ItemCount itemsQty={itemsQty} stock={stock} setItemsQty={setItemsQty} /> }
+                                    ) : <ItemCount product={product} itemsQty={itemsQty} unitPrice={unitPrice} stock={stock} setItemsQty={setItemsQty} setSwitchButtons={setSwitchButtons} setUpdateQuantity={setUpdateQuantity} setCheckStock={setCheckStock} /> }
 
                                 { checkStock ? (
                                     <div>

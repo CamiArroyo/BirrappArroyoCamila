@@ -32,7 +32,6 @@ const Home = () => {
                 array.push({id: doc.id, ...doc.data()})
             })
             sortArray(array)
-            console.log("Arreglo completo ordenado: ", array)
             setProducts(array)
         }
 

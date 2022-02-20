@@ -66,14 +66,12 @@ export const CartProvider = ( {children} ) => { //children es el prop que me per
             setCheckStock(true)
         } else {
             if (isInCart(producto)) {
-                console.log("Este producto ya existe en el carrito, se actualiza la cantidad")
                 setNewQty(producto, qty)
                 setUpdateQuantity(true)
             } else {
                 if ( qty>0 ) {
                     producto.qty = qty
                     producto.subtotal = (qty*unitPrice)
-                    console.log("Producto a agregar: ", producto)
                     setCartItems([...cartItems, producto]) // spread operator: con los "..." agarramos una copia del array, instanciamos esa copia y agregamos un nuevo valor
                     setSwitchButtons(true)
                 }

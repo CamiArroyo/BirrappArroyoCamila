@@ -66,8 +66,9 @@ const Cart = () => {
                     <Container fluid>
                         <Row>
                             <Col lg={{ span:10, offset: 1}}>
-                                <div className="cart-container">
+                                <div className="cart-container d-flex flex-md-row flex-column justify-content-around">
                                     Cantidad de productos en el carrito: { cartItemsQty() }
+                                    <Button style={{marginLeft : 10}} onClick={ () => clearAll() } variant="secondary">Vaciar carrito</Button>
                                 </div>
                                 <hr />
                                 <div className="cart-list">
@@ -105,9 +106,8 @@ const Cart = () => {
                                         <div className="order-total-content-title">Total: ${total}</div>
                                     </div>
                                 </div>
-                                <div>
-                                    <Button style={{margin : 10}} variant="secondary"><Link as={Link} to="/">Seguir agregando productos al carrito</Link></Button>
-                                    <Button style={{margin : 10}} onClick={ () => clearAll() } variant="secondary">Vaciar carrito</Button>
+                                <div className="cart-container d-flex flex-md-row flex-column justify-content-around">
+                                    <Button style={{margin : 10}} variant="secondary"><Link style={{color:'white'}} as={Link} to="/">Agregando productos</Link></Button>
                                     <Button style={{margin : 10}} variant="secondary" onClick={checkout}>Finalizar compra</Button>
                                 </div>
                             </Col>
@@ -116,8 +116,8 @@ const Cart = () => {
                 </div>
                 } else {
                     return <div> 
-                        <div style={{ marginTop: 100 }}>No hay productos en el carrito</div>
-                        <Button variant="secondary"><Link as={Link} to="/">Comenzar a comprar</Link></Button>
+                        <div style={{ marginTop: 100, marginBottom: 50 }}>No hay productos en el carrito</div>
+                        <Button variant="secondary"><Link style={{color:'white'}} as={Link} to="/">Comenzar a comprar</Link></Button>
                         </div>
                 }
             })()}

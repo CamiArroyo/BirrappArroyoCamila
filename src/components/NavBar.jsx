@@ -3,16 +3,6 @@ import CartWidget from "./CartWidget";
 import { Container, Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import { BsSearch } from "react-icons/bs";
 import { Link, NavLink } from 'react-router-dom';
-import { CartProvider } from '../contexts/CartContext';
-
-/* FUTURO DESPLEGABLE EN EL NAVBAR
-    <NavDropdown title="Familias" id="navbarScrollingDropdown">
-        <NavDropdown.Item href="#action1">Quilmes</NavDropdown.Item>
-        <NavDropdown.Item href="#action2">Patagonia</NavDropdown.Item>
-        <NavDropdown.Item href="#action3">Andes Origen</NavDropdown.Item>
-        <NavDropdown.Item href="#action4">Stella Artois</NavDropdown.Item>
-    </NavDropdown>
- */
 
 const NavBar = () => {
     return (
