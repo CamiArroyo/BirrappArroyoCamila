@@ -2,6 +2,9 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
+//Importar el módulo de autenticación
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+
 //Importante --> Esto lo importé manuelamente
 import { getFirestore } from "firebase/firestore";
 
@@ -22,6 +25,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 const analytics = getAnalytics(app);{}
 
+export const auth = getAuth();
+auth.useDeviceLanguage();
+
 export const db = getFirestore(app);
+export const googleProvider = new GoogleAuthProvider();

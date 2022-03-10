@@ -1,15 +1,16 @@
 import React from 'react';
 import CartWidget from "./CartWidget";
-import { Container, Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
-import { BsSearch } from "react-icons/bs";
+import { Container, Nav, Navbar, Form } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
+import UserLoggedIn from './UserLoggedIn';
+import SignOut from './SignOut';
 
 const NavBar = () => {
     return (
         <div style={{ fontSize: "1rem"}}>
             <Navbar expand="lg" style={{ backgroundColor: "#fff159" }} fixed="top">
                 <Container fluid>
-                    <Navbar.Brand as={Link} to="/">Birrapp</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">Birrapp!</Navbar.Brand>
                     <div>
                         <Navbar.Collapse className="menuDesplegable" id="navbarScroll">
                             <Nav
@@ -23,18 +24,13 @@ const NavBar = () => {
                         </Navbar.Collapse>
                     </div>
                     <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Form className="d-flex">
-                        <FormControl
-                        type="search"
-                        placeholder="Busque un producto"
-                        aria-label="Search"
-                        />
-                        <Button variant="secondary"><BsSearch size="1.5em" color="white"/></Button>
-                    </Form>
                     <Nav>
                         <Nav.Link as={Link} to="/cart"><CartWidget /></Nav.Link>
                     </Nav>
-                
+                    <Nav>
+                        <UserLoggedIn/>
+                        <SignOut/>
+                    </Nav>
                 </Container>
             </Navbar>
         </div>
