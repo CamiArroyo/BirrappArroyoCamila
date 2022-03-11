@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
-import ItemDetail from './ItemDetail';
+import ItemDetail from '../elements/ItemDetail';
 import { getDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
 const ItemDetailContainer = () => {
     

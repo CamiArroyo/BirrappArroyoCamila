@@ -1,17 +1,18 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Layout from './components/Layout';
-import NoPage from './components/NoPage';
-import ItemDetailContainer from './components/ItemDetailContainer';
-import Category from './components/Category';
-import Cart from './components/Cart';
+import Home from './pages/Home';
+import Layout from './components/layouts/Layout';
+import NoPage from './pages/NoPage';
+import ItemDetailContainer from './components/containers/ItemDetailContainer';
+import Category from './pages/Category';
+import Cart from './pages/Cart';
 import AddItem from './pages/AddItem';
+import EditItem from './pages/EditItem';
 import { CartProvider } from './contexts/CartContext';
 import { auth } from './firebase';
 import { useState, useEffect } from 'react';
-import SignIn from './components/SignIn';
+import SignIn from './components/authentication/SignIn';
 
 const App = () => {
 
@@ -49,7 +50,8 @@ const App = () => {
               <Route path="/category/:name" element={ <Category/> }/>
               <Route path="/cart" element={ <Cart /> }/>
               <Route path="*" element={ <NoPage /> }/>
-              <Route path="/additem" element={<AddItem />} />   
+              <Route path="/additem" element={<AddItem />} />
+              <Route path="/edititem/:id" element={<EditItem />} />  
             </Route>
         </Routes>
       </BrowserRouter>

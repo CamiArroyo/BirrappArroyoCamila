@@ -1,11 +1,15 @@
 import React from 'react';
 import CartWidget from "./CartWidget";
-import { Container, Nav, Navbar, Form } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
-import UserLoggedIn from './UserLoggedIn';
-import SignOut from './SignOut';
+import UserLoggedIn from '../authentication/UserLoggedIn';
+import SignOut from '../authentication/SignOut';
+import { auth } from '../../firebase';
 
 const NavBar = () => {
+
+    const { email } = auth.currentUser;
+
     return (
         <div style={{ fontSize: "1rem"}}>
             <Navbar expand="lg" style={{ backgroundColor: "#fff159" }} fixed="top">
@@ -20,6 +24,10 @@ const NavBar = () => {
                             <Nav.Link as={NavLink} to="/category/Clásica">Clásicas</Nav.Link>
                             <Nav.Link as={NavLink} to="/category/Premium">Premium</Nav.Link>
                             <Nav.Link as={NavLink} to="/category/Artesanal">Artesanales</Nav.Link>
+                            { (email == "camiarroyo98.1@gmail.com") ? 
+                            (
+                                <Nav.Link as={NavLink} to="/additem" style={{fontStyle:'italic', color:'black'}}>Agregar items</Nav.Link>
+                            ) : null }
                             </Nav>
                         </Navbar.Collapse>
                     </div>

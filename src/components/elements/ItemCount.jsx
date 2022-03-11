@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CartContext } from '../contexts/CartContext';
+import { CartContext } from '../../contexts/CartContext';
 import { Button} from 'react-bootstrap';
 
 const ItemCount = ({product, itemsQty, unitPrice, stock, setItemsQty, setSwitchButtons, setUpdateQuantity, setCheckStock}) => {

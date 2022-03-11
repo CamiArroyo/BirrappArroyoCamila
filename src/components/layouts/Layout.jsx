@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from './NavBar';
-import Loading from './Loading';
+import NavBar from '../elements/NavBar';
+import Loading from '../elements/Loading';
 
 const Layout = () => {
 

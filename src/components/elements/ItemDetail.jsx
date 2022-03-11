@@ -1,19 +1,26 @@
 import React, { useState, useContext } from 'react';
 import { Accordion, Nav, Col, Container, Row, Card, Button} from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import { CartContext } from '../contexts/CartContext';
+import { useNavigate, Link } from "react-router-dom";
+import { CartContext } from '../../contexts/CartContext';
 import ItemCount from './ItemCount';
+import { auth } from '../../firebase';
 
 const ItemDetail = ( {product} ) => {
 
     const { InfoModal } = useContext(CartContext);
+    const { email } = auth.currentUser;
 
-    const {name, brand, unitPrice, urlImg, description, stock} = product
+    const {id, name, brand, unitPrice, urlImg, description, stock} = product
     const [itemsQty, setItemsQty] = useState(1);
 
     const [switchButtons, setSwitchButtons] = useState(false);
     const [updateQuantity, setUpdateQuantity] = useState(false);
     const [checkStock, setCheckStock] = useState(false);
+
+    const navigate = useNavigate();
+    const goToEditItem = () => {
+        navigate(`/edititem/${id}`)
+    }
 
     return(
         <div style={{ marginTop:100, marginBottom: 100}}>
@@ -25,14 +32,18 @@ const ItemDetail = ( {product} ) => {
                                 <Nav.Link href="#first"><span style={{fontWeight:600}}>{name}</span></Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to="/" className="btn btn-link">Volver al inicio</Link>
+                                <Button style={{marginLeft: 8, marginBottom: 8}} variant="secondary"><Link style={{color:'white'}} as={Link} to="/">Volver al inicio</Link></Button>
+                                { (email == "camiarroyo98.1@gmail.com") ? 
+                                (
+                                    <Button style={{marginLeft: 8, marginBottom: 8}} variant="secondary" onClick={() => goToEditItem()}>Editar item</Button>
+                                ) : null }
                             </Nav.Item>
                         </Nav>
                     </Card.Header>
                     <Card.Body>
                         <Row>
                             <Col>
-                                <Card.Img variant="top" src={require('../components/img/'+urlImg)} width="400" height="auto" class="img-fluid d-block mx-auto"/>
+                                <Card.Img variant="top" src={require('../img/'+urlImg)} width="400" height="auto" class="img-fluid d-block mx-auto"/>
                             </Col>
                             <Col>
                                 <Card.Title style={{fontSize:30}}>{name}</Card.Title>

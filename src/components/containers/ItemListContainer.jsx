@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemList from './ItemList';
+import ItemList from '../elements/ItemList';
 import { Container, Row } from 'react-bootstrap';
 
 const ItemListContainer = ({ products }) => {

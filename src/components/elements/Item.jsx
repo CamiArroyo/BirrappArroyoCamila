@@ -14,7 +14,7 @@ const Item = ({product}) => {
     return (
         <>
             <Card border="secondary" style={{ margin:20, width: '16rem' }}>
-                <img variant="top" src={require('../components/img/'+urlImg)} width="200" height="auto" class="img-fluid d-block mx-auto"/>
+                <img variant="top" src={require('../img/'+urlImg)} width="200" height="auto" class="img-fluid d-block mx-auto"/>
                 <Card.Body>
                     <Card.Title style={{ fontSize:18, height: '3rem' }}>{name}</Card.Title>
                     <Card.Subtitle>Marca: {brand}</Card.Subtitle>

@@ -3,18 +3,43 @@ import { Col, Container, Button, Row } from 'react-bootstrap';
 import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { Link } from 'react-router-dom';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { auth } from '../firebase';
 import { db } from '../firebase';
 
 const Cart = () => {
 
     const { cartItems, cartItemsQty, removeItem, sumTotal, clearAll } = useContext(CartContext);
+    const { displayName, email } = auth.currentUser;
 
     const [ success, setSuccess ] = useState(false);
     const [ orderId, setOrderId ] = useState("");
     const [ total, setTotal ] = useState(0);
 
     const checkout = () => {
+
+        const getFromFirebase = async () => {
+    
+            for(var i=0 ; i<cartItems.length ; i++) {
+                let itemId = cartItems[i].id
+                let qtyItem = cartItems[i].qty
+    
+                const docRef = doc(db, "items", itemId)
+                const docSnapshot = await getDoc(docRef) //para getDoc necesito la referencia al documento
+                let stockItem = docSnapshot.data().stock
+    
+                let newQty = stockItem - qtyItem
+                console.log("newQty: ", newQty)
+    
+                updateDoc(docRef, {
+                    stock: newQty
+                }).then(doc => {
+                    console.log("Se actualizó el documento ", itemId)
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }
 
         if (cartItems.length === 0 ) {
             console.log("OJO! No hay items en el carrito")
@@ -31,10 +56,8 @@ const Cart = () => {
         })
 
         const buyer = {
-            name: "Nombre del comprador",
-            addres: "Dirección del comprador",
-            phone: "Teléfono del comprador",
-            email: "Email del comprador"
+            name: {displayName},
+            email: {email}
         }
 
         const order = { buyer: buyer, items: itemsToBuy, date: new Date(), total: total}
@@ -47,6 +70,8 @@ const Cart = () => {
         .catch(err => {
             console.log("Problema: ", err)
         })
+
+        getFromFirebase()
 
     }
 
@@ -107,7 +132,7 @@ const Cart = () => {
                                     </div>
                                 </div>
                                 <div className="cart-container d-flex flex-md-row flex-column justify-content-around">
-                                    <Button style={{margin : 10}} variant="secondary"><Link style={{color:'white'}} as={Link} to="/">Agregando productos</Link></Button>
+                                    <Button style={{margin : 10}} variant="secondary"><Link style={{color:'white'}} as={Link} to="/">Agregar más productos</Link></Button>
                                     <Button style={{margin : 10}} variant="secondary" onClick={checkout}>Finalizar compra</Button>
                                 </div>
                             </Col>

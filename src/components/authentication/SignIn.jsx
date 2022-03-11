@@ -1,14 +1,14 @@
 import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebase";
+import { auth, googleProvider } from "../../firebase";
 import { Carousel, Container, Card, Nav, Button } from 'react-bootstrap';
-import andesLataRubia from './img/andesLataRubia.jpg'
-import brahmaLata from './img/brahmaLata.jpg'
-import budweiserLata from './img/budweiserLata.jpg'
-import coronaLata from './img/coronaLata.jpg'
-import patagoniaLataAmberLager from './img/patagoniaLataAmberLager.jpg'
-import quilmesLataClasica from './img/quilmesLataClasica.jpg'
-import stellaLataGrandeRubia from './img/stellaLataGrandeRubia.jpg'
-import templeLataHoney from './img/templeLataHoney.jpg'
+import andesLataRubia from '../img/andesLataRubia.jpg'
+import brahmaLata from '../img/brahmaLata.jpg'
+import budweiserLata from '../img/budweiserLata.jpg'
+import coronaLata from '../img/coronaLata.jpg'
+import patagoniaLataAmberLager from '../img/patagoniaLataAmberLager.jpg'
+import quilmesLataClasica from '../img/quilmesLataClasica.jpg'
+import stellaLataGrandeRubia from '../img/stellaLataGrandeRubia.jpg'
+import templeLataHoney from '../img/templeLataHoney.jpg'
 
 const SignIn = () => {
 
@@ -31,7 +31,7 @@ const SignIn = () => {
                         <Nav className="d-flex flex-md-row flex-column justify-content-around">
                             <div style={{marginTop:15, marginBottom:10}}><h3>Birrap!</h3></div>
                             <div style={{marginTop:15, marginBottom:10}}><Button style={{padding:10}} variant="secondary" className="sign-in" onClick={signInWithGoogle}>Iniciar sesión con Google</Button></div>
-                            <div><img src={require('../components/img/vasos.jpg')} width="90" height="auto" class="img-fluid d-block mx-auto" style={{opacity:0.8}}></img></div>
+                            <div><img src={require('../img/vasos.jpg')} width="90" height="auto" class="img-fluid d-block mx-auto" style={{opacity:0.8}}></img></div>
                         </Nav>
                     </Card.Header>
                     <Card.Body>
