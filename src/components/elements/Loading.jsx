@@ -1,8 +1,12 @@
+import { Spinner } from 'react-bootstrap';
+
 const Loading = () => {
 
     return (
         <div>
-            <h5 style={{marginTop:100}}>Cargando...</h5>
+            <Spinner animation="border" role="status" style={{marginTop:50}}>
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
         </div>
     )
 }

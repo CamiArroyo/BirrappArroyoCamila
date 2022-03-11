@@ -3,7 +3,7 @@ import { Col, Container, Button, Row } from 'react-bootstrap';
 import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { Link } from 'react-router-dom';
-import { addDoc, collection, getDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { addDoc, collection, getDoc, updateDoc, doc } from 'firebase/firestore';
 import { auth } from '../firebase';
 import { db } from '../firebase';
 
@@ -18,7 +18,7 @@ const Cart = () => {
 
     const checkout = () => {
 
-        const getFromFirebase = async () => {
+        const updateFirebase = async () => {
     
             for(var i=0 ; i<cartItems.length ; i++) {
                 let itemId = cartItems[i].id
@@ -71,7 +71,7 @@ const Cart = () => {
             console.log("Problema: ", err)
         })
 
-        getFromFirebase()
+        updateFirebase()
 
     }
 

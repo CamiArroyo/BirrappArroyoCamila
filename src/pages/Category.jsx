@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemListContainer from '../components/containers/ItemListContainer';
+import { useOutletContext } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
@@ -9,20 +10,21 @@ const Category = () => {
 
     const { name } = useParams();
     const[products, setProducts] = useState([]);
-
-    const sortArray = (array) => {
-        array.sort((a,b) => {
-            if(a.name < b.name) {
-                return -1
-            }
-            if (a.name > b.name) {
-                return 1
-            }
-            return 0
-        })
-    }
+    const[setLoading] = useOutletContext();
 
     useEffect(() => {
+
+        const sortArray = (array) => {
+            array.sort((a,b) => {
+                if(a.name < b.name) {
+                    return -1
+                }
+                if (a.name > b.name) {
+                    return 1
+                }
+                return 0
+            })
+        }
 
         const getFromFirebase = async () => {
             const q = query(collection(db, "items"), where("category", "==", name));
@@ -35,7 +37,16 @@ const Category = () => {
             setProducts(array)
         }
 
-        getFromFirebase()
+        let mounted = true
+        setLoading(true)
+        if(mounted) {
+            setTimeout(() => {
+                getFromFirebase()
+                setLoading(false)
+            }, 1000)
+        }
+
+        return () => mounted = false;
 
     }, [name])
 

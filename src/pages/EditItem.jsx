@@ -1,13 +1,17 @@
 import { Button, Container, Form } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, getDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { CartContext } from '../contexts/CartContext';
 
 const EditItem = () => {
 
     const { id } = useParams();
     const [brands, setBrands] = useState([]);
+    const [name, setName] = useState("")
+    const { InfoModal } = useContext(CartContext);
+    const [confirm, setConfirm] = useState(false)
     const [ formValues, setFormValues ] = useState(
         {
             name: "",
@@ -29,6 +33,7 @@ const EditItem = () => {
         const brand = event.target.elements.brand.value; 
         const category = chooseCategory(brand);
         const urlImg = event.target.elements.urlImg.value;
+        setName(event.target.elements.name.value)
         addToFirebase(name, description, unitPrice, stock, brand, category, urlImg)
     }
 
@@ -60,6 +65,7 @@ const EditItem = () => {
             urlImg: urlImg
         }).then(doc => {
             console.log("Se actualizó el documento")
+            setConfirm(true)
         }).catch(err => {
             console.log(err)
         })
@@ -137,6 +143,11 @@ const EditItem = () => {
             <Button style={{marginBottom:50}} variant="secondary" type="submit">
                 Modificar producto
             </Button>
+            { confirm ? (
+                <div>
+                    <InfoModal name={name} info="¡Producto modificado!"></InfoModal>
+                </div>
+            ) : null }
             </Form>
         </Container>
     );
