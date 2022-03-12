@@ -39,10 +39,10 @@ const EditItem = () => {
 
     const chooseCategory = (itemBrand) => {
         let category = "";
-        if (itemBrand == "Brahma" || itemBrand == "Quilmes" || itemBrand == "Budweiser") {
+        if (itemBrand === "Brahma" || itemBrand === "Quilmes" || itemBrand === "Budweiser") {
             category = "Clásica";
         } else {
-            if (itemBrand == "Corona" || itemBrand == "Stella Artois" || itemBrand == "Andes Origen") {
+            if (itemBrand === "Corona" || itemBrand === "Stella Artois" || itemBrand === "Andes Origen") {
                 category = "Premium";
             } else {
                 category = "Artesanal";

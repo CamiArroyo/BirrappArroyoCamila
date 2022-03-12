@@ -102,7 +102,7 @@ const AddItem = () => {
                 <Form.Label>Nombre de la imagen</Form.Label>
                 <Form.Control type="text" placeholder="Ingrese el nombre del archivo .jpg del producto" />
             </Form.Group>                        
-            <Button variant="primary" type="submit">
+            <Button style={{marginBottom:50}} variant="secondary" type="submit">
                 Agregar producto
             </Button>
             { confirm ? (
