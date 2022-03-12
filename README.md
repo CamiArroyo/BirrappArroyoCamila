@@ -1,3 +1,75 @@
+# **Bienvenida/o al repositorio Birrap!**
+Birrap es un proyecto desarrollado en torno al curso de **React**, tercera parte de la carrera **Desarrollo Front End** de [CoderHouse](https://www.coderhouse.com/?utm_term=coderhouse&utm_campaign=12058006243&utm_source=google_search_brand&utm_medium=cpc&gclid=CjwKCAiAprGRBhBgEiwANJEY7OSoAIO6kwiyur3M8TENPxJUkbMA99h_HDMJY40zMcYz98WSPNWo4xoCwWcQAvD_BwE).
+El proyecto fue desarrollado durante los meses enero, febrero y marzo de 2022, y entregado el día 12/03/2022.
+
+## Desarrolladora
+Mi nombre es Camila Arroyo, soy estudiante avanzada de Ingeniería en Sistemas de Información y estudiante de programación.
+
+## Objetivo del proyecto
+Brindar información para realizar la compra de cervezas en unidades individuales de las marcas Andes Origen, Brahma, Budweiser, Corona, Quilmes, Patagonia, Stella Artois y Temple, en latas y botellas.
+Además, permitir al administrador de la aplicación cargar nuevos productos y modificar los existentes.
+
+## Secciones de la aplicación
+- Página de inicio: deberás ingresar con una cuenta de Google para luego redirigirte a la página principal donde podrás comenzar a comprar.
+- Lista de ítems: se muestran todos los productos disponibles.
+- Información detallada de cada ítem: se muestra la descripción del producto y se permite agregarlo al carro de compras.
+- Carro de compras: se muestran todos los productos agregados y se permite finalizar la compra, devolviendo el número de order para futuro seguimiento.
+
+## Estructura de la carpeta src
+La carpeta src contiene los archivos **.jsx** desarrollados para este ecommerce. Es importante comprender la subdivisión de código, para tener una navegabilidad óptima en el repositorio.
+- **components**
+	- **authentication:** contienen los archivos que se encargarán del manejo de usuarios, inicio de sesión y cierre de sesión.
+		- *SignIn.jsx*
+		- *SignOut.jsx*
+		- *UserLoggedIn.jsx*
+	- **containers:** incluye los archivos contenedores de otros, de ItemDetail y de ItemList respectivamente. Permite tener componentes con objetivos puntuales.
+		- *ItemDetailContainer.jsx*
+		- *ItemListContainer.jsx*
+	- **elements:** cada archivo se corresponde a un elemento individual de la aplicación, incluyendo la barra de navegación.
+		- *CartWidget.jsx*
+		- *Item.jsx*
+		- *ItemCount.jsx*
+		- *ItemDetail.jsx*
+		- *ItemList.jsx*
+		- *Loading.jsx*
+		- *NavBar.jsx*
+	- **layouts:** contiene el layout de la aplicación, que nos permite ememeber el loading para que podamos usarlo en cualquier parte de la misma.
+		- *Layout.jsx*
+- **contexts:** incluye el contexto principal de nuestro proyecto, que proporciona sus funciones a toda la aplicación.
+	- *CartContext.jsx*
+- **pages:** incluye cada una de las secciones a las cuales podemos navegar en la página web.
+	- *AddItem.jsx*
+	- *Cart.jsx*
+	- *Category.jsx*
+	- *EditItem.jsx*
+	- *Home.jsx*
+	- *NoPage.jsx*
+
+## Tecnologías utilizadas
+- HTTP
+- CSS
+- Bootstrap
+- Javascript
+- React
+- Firebase / Firestore
+
+## Manejo de usuarios y permisos
+Como ya fue dicho, en primera instancia debemos ingresar con nuestro correo de Gmail. Entonces, en caso de que el correo sea el correspondiente al administrador del proyecto (a fines de desarrollo, es mi correo personal), se muestran dos pestañas más que al resto de los usuarios:
+- Agregar ítems: permitiendo agregar un nuevo producto, el cual automáticamente es mostrado en la lista de ítems.
+- Editar ítem: permitiendo modificar los datos del producto en cuestión.
+
+## Futuras mejoras
+### Imágenes de los productos
+#### Situación actual:
+En primera instancia, a fín de simplificar el desarrollo, las imágenes de cada producto fueron agregadas a una carpeta **img** (que se encuentra en el repositorio actual) y luego accedidas desde el código mediante las rutas correspondientes.
+#### Solución:
+Posteriormente, estás imágenes deberán ser agregadas a Firebase y accedidas desde allí, como cualquier otro dato de cada producto.
+### Recargo de la página
+#### Situación actual:
+Con el desarrollo actual, cada vez que se carga la página se vacía el carrito.
+#### Solución:
+Almacenar en Firebase el carrito del usuario actualmente loggueado (con los ítems que contiene), y actualizar esos datos cada vez que se carga la página. Además, una vez que la compra se confirma, se debería borrar dicho carrito de Firebase, para evitar almacenar información redundante.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
